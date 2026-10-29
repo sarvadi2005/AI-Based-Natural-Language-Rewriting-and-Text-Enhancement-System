@@ -1,0 +1,161 @@
+
+# ==========================================
+# AI-Based Natural Language Rewriting System
+# Git Ignore Configuration
+# ==========================================
+
+# Dependencies
+node_modules/
+**/node_modules/
+vendor/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# API keys and credentials
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account.json
+secrets/
+secrets.json
+
+# Frontend build output
+dist/
+build/
+out/
+.next/
+.nuxt/
+.output/
+.vercel/
+.netlify/
+
+# Backend build and runtime files
+coverage/
+*.log
+logs/
+log/
+tmp/
+temp/
+*.pid
+*.pid.lock
+pids/
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# Python packaging
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.eggs/
+*.egg-info/
+wheels/
+pip-wheel-metadata/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# AI / ML model files
+models/
+checkpoints/
+*.pt
+*.pth
+*.onnx
+*.h5
+*.hdf5
+*.safetensors
+*.gguf
+*.bin
+*.pkl
+*.pickle
+*.joblib
+
+# Hugging Face and model caches
+.cache/
+huggingface_cache/
+transformers_cache/
+
+# Generated datasets and temporary AI outputs
+data/raw/
+data/processed/
+datasets/
+generated/
+outputs/
+uploads/
+downloads/
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# Testing and reports
+test-results/
+playwright-report/
+.nyc_output/
+
+# IDE settings
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Package manager and tool caches
+.npm/
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.turbo/
+.eslintcache
+.stylelintcache
+
+# TypeScript generated files
+*.tsbuildinfo
+
+# Deployment and infrastructure secrets
+terraform.tfstate
+terraform.tfstate.*
+.serverless/
+.aws-sam/
+
+# Local configuration and backups
+*.bak
+*.backup
+*.old
+*.orig
+*.swp
+*.swo
+*~
+
+# Keep dependency lockfiles tracked:
+# package-lock.json
+# pnpm-lock.yaml
+# yarn.lock
+# requirements.txt
+# poetry.lock

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11142a">
+  <meta name="description" content="Rewrite and enhance text with your AI writing API.">
+  <title>Rewrite Studio — AI Writing Workspace</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Rewrite Studio home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4.5 16.9 15.9 5.5a2.1 2.1 0 0 1 3 3L7.5 19.9l-4 .9 1-3.9Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="m13.8 7.6 3 3M4 13.2l-1.2-1.1M10.7 3.8 9.6 2.5M20.1 15.4l1.4 1.1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </span>
+        <span class="brand-name">rewrite<span>studio</span></span>
+      </a>
+      <div class="topbar-center">
+        <span class="workspace-label">AI WRITING WORKSPACE</span>
+      </div>
+      <div class="topbar-actions">
+        <span class="api-status" id="apiStatus" role="status" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="apiStatusText">Checking API…</span>
+        </span>
+        <button class="icon-button" id="refreshHealth" type="button" aria-label="Check API connection" title="Check API connection">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.5 9a7 7 0 0 1 12-2L20 12M4 12l2.5 5a7 7 0 0 0 12-2"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar" aria-label="Rewrite settings and history">
+        <div class="sidebar-heading">
+          <div>
+            <p class="eyebrow">YOUR WORKSPACE</p>
+            <h1>Rewrite studio</h1>
+          </div>
+          <span class="sidebar-sparkle" aria-hidden="true">✦</span>
+        </div>
+
+        <section class="mode-section" aria-labelledby="modeHeading">
+          <div class="section-title-row">
+            <h2 id="modeHeading">REWRITE MODE</h2>
+            <span class="section-count">08</span>
+          </div>
+          <div class="mode-list" id="modeList">
+            <button class="mode-option is-selected" type="button" data-mode="improve" aria-pressed="true">
+              <span class="mode-icon icon-lavender" aria-hidden="true">✧</span><span class="mode-copy"><strong>Improve writing</strong><small>Polish and refine</small></span><span class="mode-check" aria-hidden="true">✓</span>
+            </button>
+            <button class="mode-option" type="button" data-mode="professional" aria-pressed="false">
+              <span class="mode-icon icon-blue" aria-hidden="true">▤</span><span class="mode-copy"><strong>Professional</strong><small>Clear and confident</small></span><span class="mode-check" aria-hidden="true">✓</span>
+            </button>
+            <button class="mode-option" type="button" data-mode="academic" aria-pressed="false">
+              <span class="mode-icon icon-cyan" aria-hidden="true">⌑</span><span class="mode-copy"><strong>Academic</strong><small>Formal and scholarly</small></span><span class="mode-check" aria-hidden="true">✓</span>
+            </button>
+            <button class="mode-option" type="button" data-mode="concise" aria-pressed="false">
+              <span class="mode-icon icon-amber" aria-hidden="true">≋</span><span class="mode-copy"><strong>Make concise</strong><small>Shorten the message</small></span><span class="mode-check" aria-hidden="true">✓</span>
+            </button>
+            <button class="mode-option" type="button" data-mode="expand" aria-pressed="false">
+              <span class="mode-icon icon-green" aria-hidden="true">↗</span><span class="mode-copy"><strong>Expand</strong><small>Add more detail</small></span><span class="mode-check" aria-hidden="true">✓</span>
+            </button>
+            <button class="mode-option" type="button" data-mode="simplify" aria-pressed="false">
+              <span class="mode-icon icon-pink" aria-hidden="true">◉</span><span class="mode-copy"><strong>Simplify</strong><small>Make it easy to read</small></span><span class="mode-check" aria-hidden="true">✓</span>
+            </button>
+            <button class="mode-option" type="button" data-mode="creative" aria-pressed="false">
+              <span class="mode-icon icon-orange" aria-hidden="true">✳</span><span class="mode-copy"><strong>Creative</strong><small>Fresh and expressive</small></span><span class="mode-check" aria-hidden="true">✓</span>
+            </button>
+            <button class="mode-option" type="button" data-mode="persuasive" aria-pressed="false">
+              <span class="mode-icon icon-violet" aria-hidden="true">◈</span><span class="mode-copy"><strong>Persuasive</strong><small>Make an impact</small></span><span class="mode-check" aria-hidden="true">✓</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="history-section" aria-labelledby="historyHeading">
+          <div class="section-title-row history-title-row">
+            <h2 id="historyHeading">RECENT HISTORY</h2>
+            <button class="text-button" type="button" id="refreshHistory" title="Refresh history">Refresh</button>
+          </div>
+          <div class="history-controls">
+            <button class="history-nav" id="historyPrev" type="button" aria-label="Previous history item" disabled>‹</button>
+            <span class="history-position" id="historyPosition">0 / 0</span>
+            <button class="history-nav" id="historyNext" type="button" aria-label="Next history item" disabled>›</button>
+          </div>
+          <div class="history-list" id="historyList" aria-live="polite">
+            <p class="history-empty">Your saved rewrites will appear here.</p>
+          </div>
+        </section>
+
+        <div class="sidebar-footer">
+          <span class="footer-orb" aria-hidden="true">✦</span>
+          <span>Thoughtful words,<br><strong>made a little better.</strong></span>
+        </div>
+      </aside>
+
+      <section class="main-content" aria-label="Text rewriting workspace">
+        <div class="page-intro">
+          <div>
+            <p class="eyebrow">A BETTER WAY TO SAY IT</p>
+            <h2>Make every word <span>work for you.</span></h2>
+            <p class="intro-copy">Shape your thoughts into writing that sounds just right.</p>
+          </div>
+          <div class="shortcut-hint"><kbd>Ctrl</kbd><span>+</span><kbd>Enter</kbd><span>to rewrite</span></div>
+        </div>
+
+        <div class="editor-toolbar">
+          <div class="selected-mode-label">
+            <span class="toolbar-sparkle" aria-hidden="true">✦</span>
+            <span>Writing mode</span>
+            <span class="mode-pill" id="selectedModeLabel">Improve writing</span>
+          </div>
+          <button class="clear-button" id="clearButton" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>
+            Clear all
+          </button>
+        </div>
+
+        <div class="panels">
+          <section class="text-panel input-panel" aria-labelledby="originalHeading">
+            <div class="panel-heading">
+              <div class="panel-title">
+                <span class="panel-index">01</span>
+                <div><h3 id="originalHeading">Your original</h3><p>Start with a thought, draft, or idea.</p></div>
+              </div>
+              <button class="sample-button" id="sampleButton" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h8M8 9h8M8 13h5M5 3h14v18H5z"/></svg>Try a sample
+              </button>
+            </div>
+            <label class="sr-only" for="originalText">Enter the text you want to rewrite</label>
+            <textarea id="originalText" placeholder="Type or paste your text here…" spellcheck="true"></textarea>
+            <div class="panel-footer">
+              <label class="upload-button" for="fileInput">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L8 8m4-4 4 4M5 14v5h14v-5"/></svg>
+                Upload .txt
+              </label>
+              <input id="fileInput" type="file" accept=".txt,text/plain">
+              <span class="word-count" id="wordCount">0 words</span>
+            </div>
+          </section>
+
+          <section class="text-panel output-panel" aria-labelledby="enhancedHeading">
+            <div class="panel-heading">
+              <div class="panel-title">
+                <span class="panel-index output-index">02</span>
+                <div><h3 id="enhancedHeading">The enhancement</h3><p>Your words, thoughtfully refined.</p></div>
+              </div>
+              <button class="copy-button" id="copyButton" type="button" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="output-content" id="outputContent" aria-live="polite" aria-label="Rewritten text">
+              <div class="empty-output">
+                <span class="empty-icon" aria-hidden="true">✧</span>
+                <p>Your refined text will appear here.</p>
+                <span>Choose a mode and let your words find their way.</span>
+              </div>
+            </div>
+            <div class="panel-footer output-footer">
+              <span class="diff-legend"><i class="legend-added"></i>Added <i class="legend-removed"></i>Removed</span>
+              <span class="word-count" id="outputWordCount">—</span>
+            </div>
+          </section>
+        </div>
+
+        <div class="action-row">
+          <div class="process-state" id="processState" aria-live="polite">
+            <span class="process-indicator" aria-hidden="true"></span>
+            <span id="processMessage">Ready when you are</span>
+          </div>
+          <button class="rewrite-button" id="rewriteButton" type="button">
+            <span class="rewrite-button-content">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></svg>
+              <span>Enhance my writing</span>
+            </span>
+            <span class="button-shortcut">↵</span>
+          </button>
+        </div>
+
+        <section class="metrics-section" aria-labelledby="metricsHeading">
+          <div class="metrics-heading">
+            <div><span class="metrics-icon" aria-hidden="true">⌁</span><h3 id="metricsHeading">Writing insights</h3><span class="metrics-subtitle">From your evaluation</span></div>
+            <span class="metrics-state" id="metricsState">Waiting for a rewrite</span>
+          </div>
+          <div class="metrics-content" id="metricsContent" aria-live="polite">
+            <p class="metrics-empty">Evaluation metrics from your API will show up here after a rewrite.</p>
+          </div>
+        </section>
+
+        <footer class="main-footer">
+          <span>Made for the words you mean.</span>
+          <span class="footer-api"><i aria-hidden="true"></i> Connected to your writing API</span>
+        </footer>
+      </section>
+    </main>
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+  </div>
+</body>
+</html>
