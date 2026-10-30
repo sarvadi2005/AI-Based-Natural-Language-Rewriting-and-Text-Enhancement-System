@@ -1,6 +1,6 @@
 "use strict";
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "https://ai-based-natural-language-rewriting-and.onrender.com";
 const MAX_UPLOAD_BYTES = 2 * 1024 * 1024;
 const MAX_DIFF_TOKENS = 850;
 
